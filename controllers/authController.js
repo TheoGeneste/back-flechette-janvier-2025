@@ -36,6 +36,8 @@ const login = async (req, res) => {
     }
 }
 
+// Middleware to protect routes
+
 const middleware = (req, res, next) => {
     const token = req.headers['authorization'];
     if (!token) {
