@@ -2,7 +2,7 @@ const connection = require("../config/bdd.js");
 
 const getAllGames = () => {
     return new Promise((resolve, reject) => {
-        connection.query("SELECT * FROM game", (error, results) => {
+        connection.query("SELECT game.id_game, status, label, GROUP_CONCAT(pseudo) as players FROM game INNER JOIN gamemode ON gamemode.id_gamemode = game.id_gamemode LEFT JOIN play on play.id_game = game.id_game LEFT JOIN players ON players.id_players = play.id_players GROUP BY game.id_game;", (error, results) => {
         if (error) {
             reject(error);
         } else {
